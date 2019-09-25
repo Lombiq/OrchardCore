@@ -1,5 +1,5 @@
 trigger:
-- master
+- dev
 - feature/azure-devops
 
 pool:
