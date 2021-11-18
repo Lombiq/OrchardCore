@@ -9,6 +9,7 @@ using OrchardCore.Admin;
 using OrchardCore.Deployment;
 using OrchardCore.DisplayManagement;
 using OrchardCore.DisplayManagement.Handlers;
+using OrchardCore.Media.Indexing;
 using OrchardCore.Modules;
 using OrchardCore.Mvc.Core.Utilities;
 using OrchardCore.Navigation;
@@ -30,6 +31,8 @@ namespace OrchardCore.Shortcodes
     {
         public override void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IMediaFileTextProvider, PdfMediaFileTextProvider2>();
+
             services.Configure<TemplateOptions>(o =>
             {
                 o.MemberAccessStrategy.Register<ShortcodeViewModel>();
