@@ -6,7 +6,6 @@ using OrchardCore.ContentManagement.Metadata.Settings;
 using OrchardCore.Contents.Models;
 using OrchardCore.Data.Migration;
 using OrchardCore.Markdown.Fields;
-using OrchardCore.Title.Models;
 using YesSql.Sql;
 
 namespace OrchardCore.Comments;
@@ -34,15 +33,11 @@ public class Migrations : DataMigration
             .Attachable());
 
         await _contentDefinitionManager.AlterTypeDefinitionAsync("Comment", type => type
-            .WithPart("TitlePart", part => part
-                .WithSettings(new TitlePartSettings { RenderTitle = false })
-                .WithPosition("0")
-            )
             .WithPart(nameof(CommentsPart), part =>
-               part.WithPosition("1")
+               part.WithPosition("0")
             )
             .WithPart(nameof(CommonPart), part =>
-                part.WithPosition("2")
+                part.WithPosition("1")
             )
             .Creatable());
 

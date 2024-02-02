@@ -21,6 +21,7 @@
     <ProjectReference Include="..\..\OrchardCore\OrchardCore.Workflows.Abstractions\OrchardCore.Workflows.Abstractions.csproj" />
     <ProjectReference Include="..\OrchardCore.ContentFields\OrchardCore.ContentFields.csproj" />
     <ProjectReference Include="..\OrchardCore.Contents\OrchardCore.Contents.csproj" />
+    <ProjectReference Include="..\OrchardCore.Lists\OrchardCore.Lists.csproj" />
     <ProjectReference Include="..\OrchardCore.Markdown\OrchardCore.Markdown.csproj" />
     <ProjectReference Include="..\OrchardCore.Title\OrchardCore.Title.csproj" />
   </ItemGroup>

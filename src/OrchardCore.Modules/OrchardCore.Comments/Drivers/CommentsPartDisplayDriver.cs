@@ -41,5 +41,6 @@ public class CommentsPartDisplayDriver : ContentPartDisplayDriver<CommentsPart>
         viewModel.Author = part.Author;
         viewModel.RelatedUser = part.RelatedUser;
         viewModel.Message = part.Message;
+        viewModel.PublishedUtc = part.ContentItem.PublishedUtc;
     }
 }

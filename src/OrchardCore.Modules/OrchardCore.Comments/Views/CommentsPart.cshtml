@@ -1,10 +1,15 @@
 @model CommentsPartViewModel
 
-<div>
-    <strong>@Model.Author</strong>
-    <div>
-        <p>
-            @Html.Raw(((string)Model.Message).Replace(Environment.NewLine, "<br>"))
-        </p>
+<div class="card text-bg-light">
+    <div class="card-body p-3">
+        <h5 class="card-title">@Model.Author</h5>
+        <time class="card-subtitle mb-2 text-muted small" datetime="@Model.PublishedUtc?.ToString()">
+            @Model.PublishedUtc?.ToString()
+        </time>
+        <div>
+            <p class="card-text">
+                @Html.Raw(((string)Model.Message).Replace(Environment.NewLine, "<br>"))
+            </p>
+        </div>
     </div>
 </div>
