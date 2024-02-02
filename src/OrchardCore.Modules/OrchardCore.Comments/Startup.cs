@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using OrchardCore.Admin;
+using OrchardCore.Comments.Drivers;
 using OrchardCore.Comments.Models;
 using OrchardCore.ContentManagement;
+using OrchardCore.ContentManagement.Display.ContentDisplay;
 using OrchardCore.Data.Migration;
 using OrchardCore.Modules;
 
@@ -22,7 +24,8 @@ public class Startup : StartupBase
 
     public override void ConfigureServices(IServiceCollection services)
     {
-        services.AddContentPart<CommentsPart>();
+        services.AddContentPart<CommentsPart>()
+            .UseDisplayDriver<CommentsPartDisplayDriver>();
         services.AddDataMigration<Migrations>();
     }
 

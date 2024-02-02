@@ -1,0 +1,10 @@
+@model CommentsPartViewModel
+
+<div>
+    <strong>@Model.Author</strong>
+    <div>
+        <p>
+            @Html.Raw(((string)Model.Message).Replace(Environment.NewLine, "<br>"))
+        </p>
+    </div>
+</div>
