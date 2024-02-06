@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using OrchardCore.Admin;
 using OrchardCore.Comments.Drivers;
+using OrchardCore.Comments.Handlers;
 using OrchardCore.Comments.Models;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Display.ContentDisplay;
@@ -27,6 +28,8 @@ public class Startup : StartupBase
         services.AddContentPart<CommentsPart>()
             .UseDisplayDriver<CommentsPartDisplayDriver>();
         services.AddDataMigration<Migrations>();
+
+        services.AddScoped<IContentDisplayHandler, CommentWidgetContentFilter>();
     }
 
     public override void Configure(IApplicationBuilder builder, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)

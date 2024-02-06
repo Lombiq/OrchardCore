@@ -1,0 +1,29 @@
+@model CommentsPartViewModel
+
+<form>
+    <div>
+        <div class="mb-2" asp-validation-class-for="Author">
+            <label asp-for="Author" class="form-label">@T["Your Name"]</label>
+            <input asp-for="Author" class="form-control" type="text" />
+            <span asp-validation-for="Author"></span>
+        </div>
+
+        <div class="mb-2" asp-validation-class-for="RelatedUser">
+            <label asp-for="RelatedUser" class="form-label">@T["Related User"]</label>
+            <input asp-for="RelatedUser" class="form-control" type="text" />
+            <span asp-validation-for="RelatedUser"></span>
+        </div>
+
+        <div class="mb-2" asp-validation-class-for="Message">
+            <label asp-for="Message" class="form-label">@T["Message"]</label>
+            <textarea asp-for="Message" class="form-control" type="text"></textarea>
+            <span asp-validation-for="Message"></span>
+        </div>
+
+        <div class="d-none">
+            <input type="text" class="form-control" autocomplete="new-password" />
+        </div>
+    </div>
+
+    <button type="submit">@T["Send Comment"]</button>
+</form>

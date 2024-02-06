@@ -10,5 +10,5 @@ public class CommentsPartViewModel
     public string RelatedUser { get; set; }
     [Required]
     public string Message { get; set; }
-    public DateTime? PublishedUtc { get; set; }
+    public DateTime? CreatedUtc { get; set; }
 }
