@@ -39,7 +39,12 @@ public class CommentWidgetContentFilter : IContentDisplayHandler
             var zone = layout.Zones["Content"];
             if (zone != null)
             {
-                var shape = await _shapeFactory.CreateAsync<CommentsPartViewModel>("CommentForm", viewModel => { });
+                var shape = await _shapeFactory.CreateAsync<CommentsPartViewModel>("CommentForm", viewModel =>
+                {
+                    viewModel.ListContentItemId = contentItem.ContentItemId;
+                    viewModel.ListContentType = contentItem.ContentType;
+                });
+
                 await zone.AddAsync(shape, "5");
             }
         }

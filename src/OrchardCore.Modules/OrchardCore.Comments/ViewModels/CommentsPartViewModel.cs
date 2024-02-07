@@ -11,4 +11,6 @@ public class CommentsPartViewModel
     [Required]
     public string Message { get; set; }
     public DateTime? CreatedUtc { get; set; }
+    public string ListContentItemId { get; set; }
+    public string ListContentType { get; set; }
 }
