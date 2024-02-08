@@ -13,4 +13,7 @@ public class CommentsPartViewModel
     public DateTime? CreatedUtc { get; set; }
     public string ListContentItemId { get; set; }
     public string ListContentType { get; set; }
+
+    // Honeypot field.
+    public string Address { get; set; }
 }

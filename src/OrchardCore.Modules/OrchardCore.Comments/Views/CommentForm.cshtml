@@ -1,10 +1,14 @@
 @model CommentsPartViewModel
 
-<form>
+@{
+    var returnUrl = Context.Request.Path;
+}
+
+<form asp-area="OrchardCore.Comments" asp-controller="Comments" asp-action="Create" asp-route-returnUrl="@returnUrl" method="post">
     <div>
         <div class="mb-2" asp-validation-class-for="Author">
             <label asp-for="Author" class="form-label">@T["Your Name"]</label>
-            <input asp-for="Author" class="form-control" type="text" />
+            <input required asp-for="Author" class="form-control" type="text" />
             <span asp-validation-for="Author"></span>
         </div>
 
@@ -16,13 +20,17 @@
 
         <div class="mb-2" asp-validation-class-for="Message">
             <label asp-for="Message" class="form-label">@T["Message"]</label>
-            <textarea asp-for="Message" class="form-control" type="text"></textarea>
+            <textarea required asp-for="Message" class="form-control" type="text"></textarea>
             <span asp-validation-for="Message"></span>
         </div>
 
-        <div class="d-none">
-            <input type="text" class="form-control" autocomplete="new-password" />
+        <div class="d-none" asp-validation-class-for="Address">
+            <input asp-for="Address" class="form-control" autocomplete="new-password" />
+            <span asp-validation-for="Address"></span>
         </div>
+
+        <input type="hidden" asp-for="ListContentItemId" value="@Model.ListContentItemId" />
+        <input type="hidden" asp-for="ListContentType" value="@Model.ListContentType" />
     </div>
 
     <button type="submit">@T["Send Comment"]</button>
