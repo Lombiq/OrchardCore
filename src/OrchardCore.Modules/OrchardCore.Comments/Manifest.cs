@@ -10,7 +10,7 @@ using OrchardCore.Modules.Manifest;
 [assembly: Feature(
     Id = "OrchardCore.Comments",
     Name = "Comments",
-    Dependencies = new[] { "OrchardCore.ContentFields" },
+    Dependencies = new[] { "OrchardCore.ContentFields", "OrchardCore.Lists" },
     Category = "Messaging",
     Description = "Provides commenting functionality."
 )]

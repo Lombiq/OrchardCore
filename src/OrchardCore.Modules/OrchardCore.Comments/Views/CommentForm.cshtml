@@ -25,6 +25,7 @@
         </div>
 
         <div class="d-none" asp-validation-class-for="Address">
+            <label asp-for="Address" class="form-label">@T["Address"]</label>
             <input asp-for="Address" class="form-control" autocomplete="new-password" />
             <span asp-validation-for="Address"></span>
         </div>

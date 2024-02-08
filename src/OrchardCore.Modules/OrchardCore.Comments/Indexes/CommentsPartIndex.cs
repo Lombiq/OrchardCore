@@ -10,7 +10,7 @@ public class CommentsPartIndex : MapIndex
     public string RelatedUser { get; set; }
 }
 
-public class CommentIndexIndexProvider : IndexProvider<ContentItem>
+public class CommentsPartIndexProvider : IndexProvider<ContentItem>
 {
     public override void Describe(DescribeContext<ContentItem> context) =>
         context.For<CommentsPartIndex>().Map(contentItem =>
