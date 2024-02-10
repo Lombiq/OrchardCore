@@ -5,7 +5,6 @@ using OrchardCore.ContentManagement.Metadata;
 using OrchardCore.ContentManagement.Metadata.Settings;
 using OrchardCore.Contents.Models;
 using OrchardCore.Data.Migration;
-using OrchardCore.Markdown.Fields;
 using YesSql.Sql;
 
 namespace OrchardCore.Comments;
@@ -21,16 +20,15 @@ public class Migrations : DataMigration
 
     public async Task<int> CreateAsync()
     {
-        await SchemaBuilder.CreateMapIndexTableAsync<CommentsPartIndex>(table => table
-            .Column<string>(nameof(CommentsPartIndex.Author), column => column.WithLength(64))
-            .Column<string>(nameof(CommentsPartIndex.RelatedUser), column => column.Nullable().WithLength(64)));
-
         await _contentDefinitionManager.AlterPartDefinitionAsync(nameof(CommentsPart), builder => builder
-            .WithField<string>("Message", field => field
-                .OfType(nameof(MarkdownField))
-                .WithDisplayName("Message"))
             .WithDescription("Provides a way to add comments to content items.")
             .Attachable());
+
+        await SchemaBuilder.CreateMapIndexTableAsync<CommentsPartIndex>(table => table
+            .Column<string>(nameof(CommentsPartIndex.Author))
+            .Column<string>(nameof(CommentsPartIndex.RelatedUser))
+            .Column<string>(nameof(CommentsPartIndex.Message))
+        );
 
         await _contentDefinitionManager.AlterTypeDefinitionAsync("Comment", type => type
             .WithPart(nameof(CommentsPart), part =>

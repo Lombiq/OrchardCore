@@ -8,6 +8,7 @@ public class CommentsPartIndex : MapIndex
 {
     public string Author { get; set; }
     public string RelatedUser { get; set; }
+    public string Message { get; set; }
 }
 
 public class CommentsPartIndexProvider : IndexProvider<ContentItem>
@@ -22,6 +23,7 @@ public class CommentsPartIndexProvider : IndexProvider<ContentItem>
                 {
                     Author = comment.Author,
                     RelatedUser = comment.RelatedUser,
+                    Message = comment.Message,
                 };
         });
 }

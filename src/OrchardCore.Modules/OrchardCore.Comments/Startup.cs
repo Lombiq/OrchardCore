@@ -10,6 +10,7 @@ using OrchardCore.Comments.Indexes;
 using OrchardCore.Comments.Models;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Display.ContentDisplay;
+using OrchardCore.Data;
 using OrchardCore.Data.Migration;
 using OrchardCore.Modules;
 
@@ -29,7 +30,7 @@ public class Startup : StartupBase
         services.AddContentPart<CommentsPart>()
             .UseDisplayDriver<CommentsPartDisplayDriver>();
         services.AddDataMigration<Migrations>();
-        services.AddScoped<CommentsPartIndexProvider>();
+        services.AddIndexProvider<CommentsPartIndexProvider>();
 
         services.AddScoped<IContentDisplayHandler, CommentWidgetContentFilter>();
     }
