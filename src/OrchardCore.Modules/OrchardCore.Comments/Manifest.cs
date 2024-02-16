@@ -14,3 +14,11 @@ using OrchardCore.Modules.Manifest;
     Category = "Messaging",
     Description = "Provides commenting functionality."
 )]
+
+[assembly: Feature(
+    Id = "OrchardCore.Comments.ReCaptcha",
+    Name = "Comments",
+    Dependencies = new[] { "OrchardCore.ReCaptcha" },
+    Category = "Messaging",
+    Description = "Adds a ReCaptcha to the Comment form."
+)]
