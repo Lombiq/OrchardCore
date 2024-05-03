@@ -85,6 +85,8 @@ namespace OrchardCore.Workflows.Controllers
 
         public async Task<IActionResult> Index(WorkflowTypeIndexOptions options, PagerParameters pagerParameters)
         {
+            // Only used to see if the overridden package is used.
+            ////await _notifier.ErrorAsync(H["1.8.2.3"]);
             if (!await _authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
             {
                 return Forbid();
@@ -122,8 +124,6 @@ namespace OrchardCore.Workflows.Controllers
                 .Take(pager.PageSize)
                 .ListAsync();
 
-            using var connection = await _session.CreateConnectionAsync();
-
             var dialect = _session.Store.Configuration.SqlDialect;
             var sqlBuilder = dialect.CreateBuilder(_session.Store.Configuration.TablePrefix);
             sqlBuilder.Select();
@@ -131,7 +131,9 @@ namespace OrchardCore.Workflows.Controllers
             sqlBuilder.Selector(nameof(WorkflowIndex), nameof(WorkflowIndex.WorkflowTypeId), _session.Store.Configuration.Schema);
             sqlBuilder.Table(nameof(WorkflowIndex), alias: null, _session.Store.Configuration.Schema);
 
-            var workflowTypeIdsWithInstances = await connection.QueryAsync<string>(sqlBuilder.ToSqlString());
+            // Use existing session connection. Do not use 'using' or dispose the connection.
+            var connection = await _session.CreateConnectionAsync();
+            var workflowTypeIdsWithInstances = (await connection.QueryAsync<string>(sqlBuilder.ToSqlString(), param: null, _session.CurrentTransaction)).ToList();
 
             // Maintain previous route data when generating page links.
             var routeData = new RouteData();
