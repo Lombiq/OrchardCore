@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Mvc.Localization;
+using Microsoft.Extensions.Localization;
 
 namespace OrchardCore.Json.Serialization;
 
-public class LocalizedHtmlStringConverter : JsonConverter<LocalizedHtmlString>
+public class LocalizedStringConverter : JsonConverter<LocalizedString>
 {
-    public override LocalizedHtmlString Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override LocalizedString Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var node = JsonNode.Parse(ref reader);
 
@@ -22,15 +22,18 @@ public class LocalizedHtmlStringConverter : JsonConverter<LocalizedHtmlString>
         if (node is JsonObject jsonObject)
         {
             var dictionary = new Dictionary<string, JsonNode>(jsonObject, StringComparer.OrdinalIgnoreCase);
-            var name = dictionary.TryGetValue(nameof(LocalizedHtmlString.Name), out var nameNode)
+            var name = dictionary.TryGetValue(nameof(LocalizedString.Name), out var nameNode)
                 ? nameNode.GetValue<string>()
                 : null;
-            var value = dictionary.TryGetValue(nameof(LocalizedHtmlString.Value), out var valueNode)
+            var value = dictionary.TryGetValue(nameof(LocalizedString.Value), out var valueNode)
                 ? valueNode.GetValue<string>() ?? name
                 : name;
             var isResourceNotFound =
-                dictionary.TryGetValue(nameof(LocalizedHtmlString.IsResourceNotFound), out var notFoundNode) &&
+                dictionary.TryGetValue(nameof(LocalizedString.ResourceNotFound), out var notFoundNode) &&
                 notFoundNode.GetValue<bool>();
+            var searchedLocation = dictionary.TryGetValue(nameof(LocalizedString.SearchedLocation), out var locationNode)
+                ? locationNode.GetValue<string>()
+                : null;
 
             name ??= value;
             if (string.IsNullOrEmpty(name)) throw new InvalidOperationException("Missing name.");
@@ -41,13 +44,14 @@ public class LocalizedHtmlStringConverter : JsonConverter<LocalizedHtmlString>
         throw new InvalidOperationException($"Can't parse token \"{node}\". It should be an object or a string");
     }
 
-    public override void Write(Utf8JsonWriter writer, LocalizedHtmlString value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, LocalizedString value, JsonSerializerOptions options)
     {
         writer.WriteStartObject();
 
-        writer.WriteString(nameof(LocalizedHtmlString.Name), value.Name);
-        writer.WriteString(nameof(LocalizedHtmlString.Value), value.Value);
-        writer.WriteBoolean(nameof(LocalizedHtmlString.IsResourceNotFound), value.IsResourceNotFound);
+        writer.WriteString(nameof(LocalizedString.Name), value.Name);
+        writer.WriteString(nameof(LocalizedString.Value), value.Value);
+        writer.WriteBoolean(nameof(LocalizedString.ResourceNotFound), value.ResourceNotFound);
+        writer.WriteString(nameof(LocalizedString.SearchedLocation), value.SearchedLocation);
 
         writer.WriteEndObject();
     }
