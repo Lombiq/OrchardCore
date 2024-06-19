@@ -38,7 +38,7 @@ public class LocalizedStringConverter : JsonConverter<LocalizedString>
             name ??= value;
             if (string.IsNullOrEmpty(name)) throw new InvalidOperationException("Missing name.");
 
-            return new(name, value, isResourceNotFound);
+            return new(name, value, isResourceNotFound, searchedLocation);
         }
 
         throw new InvalidOperationException($"Can't parse token \"{node}\". It should be an object or a string");
