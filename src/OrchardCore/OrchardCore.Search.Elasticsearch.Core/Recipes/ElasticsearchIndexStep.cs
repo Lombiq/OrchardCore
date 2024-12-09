@@ -40,7 +40,7 @@ public sealed class ElasticsearchIndexStep : NamedRecipeStepHandler
 
             if (await _elasticIndexManager.ExistsAsync(elasticIndexSettings.Key))
             {
-                context.Errors.Add(T["The index '{0}' already exists.", elasticIndexSettings.Key].Value);
+                context.Errors.Add(T["The Elasticsearch index '{0}' already exists.", elasticIndexSettings.Key].Value);
             }
             else
             {

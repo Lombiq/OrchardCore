@@ -34,7 +34,11 @@ public sealed class LuceneIndexStep : NamedRecipeStepHandler
         {
             var luceneIndexSettings = index.ToObject<Dictionary<string, LuceneIndexSettings>>().FirstOrDefault();
 
-            if (!_luceneIndexManager.Exists(luceneIndexSettings.Key))
+            if (_luceneIndexManager.Exists(luceneIndexSettings.Key))
+            {
+                context.Errors.Add($"The Lucene index '{luceneIndexSettings.Key}' already exists.");
+            }
+            else
             {
                 luceneIndexSettings.Value.IndexName = luceneIndexSettings.Key;
                 await _luceneIndexingService.CreateIndexAsync(luceneIndexSettings.Value);
