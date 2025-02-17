@@ -31,6 +31,7 @@
     <!--
       When adding a reference to this list, please keep it ordered alphabetically, and set PrivateAssets="none"
     -->
+    <ProjectReference Include="..\..\OrchardCore.Themes\PuxOrchard.Theme.OliveCMS\PuxOrchard.Theme.OliveCMS.csproj" PrivateAssets="none" />
     <ProjectReference Include="..\..\OrchardCore.Themes\SafeMode\SafeMode.csproj" PrivateAssets="none" />
     <ProjectReference Include="..\..\OrchardCore.Themes\TheAgencyTheme\TheAgencyTheme.csproj" PrivateAssets="none" />
     <ProjectReference Include="..\..\OrchardCore.Themes\TheBlogTheme\TheBlogTheme.csproj" PrivateAssets="none" />

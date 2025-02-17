@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <Version>2.1.5.1</Version>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <IsPackable>true</IsPackable>
+    <Authors>PUXdesign</Authors>
+        <Company>PUXdesign</Company>
+        <Description>Custom admin theming for OrchardCore Admin based on Bootstrap. Overrides base admin theme and brings a fresh new experience for content editors.</Description>
+        <PackageProjectUrl>https://github.com/puxdesign/PuxOrchard.Theme.OliveCMS/</PackageProjectUrl>
+        <PackageTags>OrchardCore, CMS, Theme</PackageTags>
+        <PackageIconUrl>https://www.puxdesign.cz/favicon-32x32.png</PackageIconUrl>
+        <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PreserveCompilationReferences>false</PreserveCompilationReferences>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AnalysisLevel>5.0</AnalysisLevel>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+        <None Include="README.md" Pack="true" PackagePath="\" />
+        <None Include="pack\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\OrchardCore\OrchardCore.Admin.Abstractions\OrchardCore.Admin.Abstractions.csproj" />
+    <ProjectReference Include="..\..\OrchardCore\OrchardCore.Theme.Targets\OrchardCore.Theme.Targets.csproj" />
+    <ProjectReference Include="..\..\OrchardCore.Modules\OrchardCore.Themes\OrchardCore.Themes.csproj" />
+    <ProjectReference Include="..\..\OrchardCore\OrchardCore.DisplayManagement\OrchardCore.DisplayManagement.csproj" />
+    <ProjectReference Include="..\..\OrchardCore\OrchardCore.ResourceManagement\OrchardCore.ResourceManagement.csproj" />
+    <ProjectReference Include="..\..\OrchardCore\OrchardCore.Users.Core\OrchardCore.Users.Core.csproj" />
+  </ItemGroup>
+</Project>
